@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acalma a aula — Professora Rafaela Garbin</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter para máxima legibilidade à distância no Educatron -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'alert-ring': 'alertRing 1.8s ease-in-out infinite',
+                        'capy-breathe': 'capyBreathe 3.8s ease-in-out infinite',
+                        'capy-alert': 'capyAlert 1.2s ease-in-out infinite',
+                        'capy-shake': 'capyShake 0.35s ease-in-out infinite',
+                        'heart-pop': 'heartPop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                    },
+                    keyframes: {
+                        alertRing: {
+                            '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 0 0 rgba(244, 63, 94, 0.45)' },
+                            '50%': { transform: 'scale(1.01)', boxShadow: '0 0 0 24px rgba(244, 63, 94, 0)' },
+                        },
+                        capyBreathe: {
+                            '0%, 100%': { transform: 'translateY(0px) scaleY(1)' },
+                            '50%': { transform: 'translateY(-5px) scaleY(1.02)' },
+                        },
+                        capyAlert: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '25%': { transform: 'translateY(-4px) rotate(-2deg)' },
+                            '75%': { transform: 'translateY(-4px) rotate(2deg)' },
+                        },
+                        capyShake: {
+                            '0%, 100%': { transform: 'translateX(0px) rotate(0deg)' },
+                            '25%': { transform: 'translateX(-5px) rotate(-3deg)' },
+                            '75%': { transform: 'translateX(5px) rotate(3deg)' },
+                        },
+                        heartPop: {
+                            '0%': { transform: 'scale(0.6)' },
+                            '60%': { transform: 'scale(1.25)' },
+                            '100%': { transform: 'scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            transition: background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s ease;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .state-transition {
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Sliders acessíveis e grandes para telas touch / Educatron */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-runnable-track {
+            height: 12px;
+            border-radius: 999px;
+            background: #e2e8f0;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            margin-top: -6px;
+            background-color: #2563eb;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+            transition: transform 0.15s ease;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
+
+        input[type="range"]::-moz-range-track {
+            height: 12px;
+            border-radius: 999px;
+            background: #e2e8f0;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            background-color: #2563eb;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+        }
+    </style>
+</head>
+<body id="app-body" class="min-h-screen flex flex-col justify-between bg-slate-100 text-slate-900 overflow-x-hidden">
+
+    <!-- CABEÇALHO / IDENTIDADE DA TURMA -->
+    <header class="w-full px-4 sm:px-8 py-3.5 flex flex-wrap items-center justify-between gap-3 z-10">
+        <!-- Identidade Principal: Acalma a aula + Professora Rafaela Garbin -->
+        <div class="flex flex-wrap items-center gap-3 sm:gap-4">
+            <div class="flex items-center gap-3 bg-white/95 backdrop-blur-md px-4 sm:px-5 py-2.5 rounded-3xl shadow-sm border border-black/10">
+                <div class="w-11 h-11 rounded-2xl bg-amber-100 border border-amber-300 flex items-center justify-center text-2xl shrink-0" aria-hidden="true">
+                    🦫
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-black tracking-tight text-slate-900 leading-none">
+                        Acalma a aula
+                    </h1>
+                    <p class="text-xs sm:text-sm font-bold text-amber-800 mt-1 flex items-center gap-1.5">
+                        <span>👩‍🏫 Professora Rafaela Garbin</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Selo discreto de privacidade -->
+            <div class="hidden lg:flex items-center gap-2 bg-white/80 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-black/5 text-xs font-semibold text-slate-700" title="Nenhum áudio é gravado, salvo ou enviado pela internet.">
+                <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                </svg>
+                <span>Áudio analisado em tempo real • Nada é gravado</span>
+            </div>
+        </div>
+
+        <!-- Botões de Ação Rápida (Reiniciar Vidas, Tela Cheia e Configurações) -->
+        <div class="flex items-center gap-2 sm:gap-2.5">
+            <!-- Botão Reiniciar sempre acessível -->
+            <button id="btn-restart-top" type="button" class="flex items-center gap-2 bg-white/95 hover:bg-amber-50 active:scale-95 text-slate-800 font-bold text-sm sm:text-base px-4 py-2.5 rounded-2xl shadow-sm border border-black/10 transition cursor-pointer" title="Restaurar todas as vidas da capivara">
+                <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                </svg>
+                <span>Reiniciar</span>
+            </button>
+
+            <!-- Botão Tela Cheia (Educatron) -->
+            <button id="btn-fullscreen" type="button" class="flex items-center gap-2 bg-white/95 hover:bg-white active:scale-95 text-slate-800 font-bold text-sm sm:text-base px-4 py-2.5 rounded-2xl shadow-sm border border-black/10 transition cursor-pointer" title="Alternar Tela Cheia (Ideal para Educatron)">
+                <svg id="icon-fullscreen-enter" class="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+                </svg>
+                <svg id="icon-fullscreen-exit" class="w-5 h-5 text-slate-700 hidden" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25" />
+                </svg>
+                <span class="hidden md:inline" id="text-fullscreen">Tela Cheia</span>
+            </button>
+
+            <!-- Botão Configurações -->
+            <button id="btn-open-settings" type="button" class="flex items-center gap-2 bg-white/95 hover:bg-white active:scale-95 text-slate-800 font-bold text-sm sm:text-base px-4 py-2.5 rounded-2xl shadow-sm border border-black/10 transition cursor-pointer" title="Configurar vidas, limites e sensibilidade">
+                <svg class="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span class="hidden sm:inline">Configurar</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ÁREA PRINCIPAL DO MONITOR SONORO E MASCOTE CAPIVARA -->
+    <main class="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-8 py-2 flex flex-col items-center justify-center">
+        
+        <!-- Banner de Erro Amigável -->
+        <div id="error-banner" class="hidden w-full max-w-3xl mb-5 bg-rose-50 border-2 border-rose-300 text-rose-900 px-6 py-4 rounded-3xl shadow-md flex items-start gap-4" role="alert">
+            <span class="text-3xl shrink-0">⚠️</span>
+            <div class="flex-1">
+                <h2 class="font-bold text-lg" id="error-title">Não foi possível acessar o microfone</h2>
+                <p class="text-sm sm:text-base mt-1 text-rose-800" id="error-message">Verifique se o microfone está conectado e se a permissão foi concedida no navegador.</p>
+            </div>
+            <button id="btn-close-error" type="button" class="text-rose-700 hover:text-rose-950 font-bold text-xl px-2 cursor-pointer" aria-label="Fechar aviso">✕</button>
+        </div>
+
+        <!-- CARD PRINCIPAL DE EXIBIÇÃO (ALTÍSSIMO CONTRASTE PARA PROJEÇÃO NO EDUCATRON) -->
+        <section id="status-card" class="state-transition w-full bg-white rounded-[2.5rem] shadow-2xl border-4 border-slate-200 p-5 sm:p-8 md:p-10 flex flex-col items-center text-center relative overflow-hidden">
+            
+            <!-- BARRA SUPERIOR DE VIDAS DA CAPIVARA -->
+            <div class="w-full max-w-3xl flex flex-col items-center justify-center bg-black/5 px-5 py-3.5 rounded-3xl border border-black/5 mb-4 sm:mb-6">
+                <div class="flex flex-wrap items-center justify-between w-full gap-2 mb-2">
+                    <span class="text-xs sm:text-sm font-extrabold uppercase tracking-wider opacity-80 flex items-center gap-1.5">
+                        <span>❤️ Vidas da Mini Capivara</span>
+                    </span>
+                    <span id="lives-counter-text" class="text-sm sm:text-base font-black px-3 py-0.5 rounded-full bg-white/80 text-slate-800 shadow-xs">
+                        5 / 5 vidas
+                    </span>
+                </div>
+
+                <!-- Container dos Corações Grandes -->
+                <div id="hearts-container" class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 my-1" aria-label="Vidas restantes da capivara">
+                    <!-- Preenchido dinamicamente via JS -->
+                </div>
+
+                <!-- Indicador Visual de Cooldown (Barrinha de resistência quando o som está alto) -->
+                <div id="cooldown-wrapper" class="w-full max-w-md mt-2 hidden">
+                    <div class="flex justify-between text-[11px] sm:text-xs font-bold text-rose-800 mb-1">
+                        <span>⚠️ Barulho alto! Perdendo próxima vida em...</span>
+                        <span id="cooldown-seconds">3.5s</span>
+                    </div>
+                    <div class="w-full h-2.5 bg-rose-200 rounded-full overflow-hidden">
+                        <div id="cooldown-bar" class="h-full bg-rose-600 transition-all duration-100 ease-linear" style="width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO CENTRAL: MASCOTE MINI CAPIVARA + BADGE DE ESTADO -->
+            <div class="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 w-full my-1">
+                
+                <!-- ILUSTRAÇÃO SVG CUSTOMIZADA DA MINI CAPIVARA VIGILANTE -->
+                <div id="capybara-wrapper" class="relative w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 shrink-0 flex items-center justify-center animate-capy-breathe">
+                    <svg id="capybara-svg" viewBox="0 0 260 260" class="w-full h-full drop-shadow-xl overflow-visible" role="img" aria-label="Mini Capivara vigilante do barulho da sala">
+                        <!-- Sombra no chão -->
+                        <ellipse cx="130" cy="236" rx="74" ry="14" fill="rgba(15, 23, 42, 0.14)" />
+
+                        <!-- Orelhas -->
+                        <g id="capy-ears">
+                            <!-- Orelha Esquerda -->
+                            <g id="capy-ear-left" transform="translate(0, 0)">
+                                <ellipse cx="72" cy="84" rx="18" ry="22" transform="rotate(-22 72 84)" fill="#78472a" stroke="#4a2815" stroke-width="4"/>
+                                <ellipse cx="73" cy="86" rx="9" ry="12" transform="rotate(-22 73 86)" fill="#b87b56"/>
+                            </g>
+                            <!-- Orelha Direita -->
+                            <g id="capy-ear-right" transform="translate(0, 0)">
+                                <ellipse cx="188" cy="84" rx="18" ry="22" transform="rotate(22 188 84)" fill="#78472a" stroke="#4a2815" stroke-width="4"/>
+                                <ellipse cx="187" cy="86" rx="9" ry="12" transform="rotate(22 187 86)" fill="#b87b56"/>
+                            </g>
+                        </g>
+
+                        <!-- Corpinho Fofo -->
+                        <path d="M 66 226 C 62 178, 82 152, 130 152 C 178 152, 198 178, 194 226 Z" fill="#9c623e" stroke="#4a2815" stroke-width="4.5" stroke-linejoin="round"/>
+                        <!-- Barriguinha mais clara -->
+                        <ellipse cx="130" cy="202" rx="38" ry="26" fill="#be845e" opacity="0.65"/>
+
+                        <!-- Cabeça Grande e Expressiva de Capivara -->
+                        <rect x="56" y="68" width="148" height="114" rx="54" fill="#a86b44" stroke="#4a2815" stroke-width="4.5"/>
+
+                        <!-- Detalhe de pelos na testa -->
+                        <path d="M 118 68 Q 124 56 130 68 Q 136 55 142 68" fill="none" stroke="#4a2815" stroke-width="4" stroke-linecap="round"/>
+
+                        <!-- ACESSÓRIO DO ESTADO TRANQUILO: Laranjinha com folha na cabeça -->
+                        <g id="capy-tangerine" class="transition-opacity duration-300">
+                            <circle cx="130" cy="52" r="18" fill="#f97316" stroke="#9a3412" stroke-width="3.5"/>
+                            <circle cx="124" cy="46" r="4" fill="#fdba74" opacity="0.8"/>
+                            <!-- Folhinha verde -->
+                            <path d="M 130 35 C 134 22, 152 22, 154 32 C 146 38, 136 38, 130 35 Z" fill="#22c55e" stroke="#15803d" stroke-width="3" stroke-linejoin="round"/>
+                        </g>
+
+                        <!-- Focinho Característico de Capivara -->
+                        <rect x="88" y="114" width="84" height="58" rx="28" fill="#7d492b" stroke="#4a2815" stroke-width="4"/>
+                        <!-- Narinas -->
+                        <ellipse cx="113" cy="130" rx="5.5" ry="4" transform="rotate(-15 113 130)" fill="#3b1e0e"/>
+                        <ellipse cx="147" cy="130" rx="5.5" ry="4" transform="rotate(15 147 130)" fill="#3b1e0e"/>
+                        <!-- Linha vertical do focinho -->
+                        <line x1="130" y1="136" x2="130" y2="152" stroke="#3b1e0e" stroke-width="3.5" stroke-linecap="round"/>
+
+                        <!-- Bochechas Rosadas -->
+                        <ellipse cx="78" cy="134" rx="11" ry="7" fill="#fb7185" opacity="0.55"/>
+                        <ellipse cx="182" cy="134" rx="11" ry="7" fill="#fb7185" opacity="0.55"/>
+
+                        <!-- EXPRESSÃO 1: OLHOS E BOCA CALMOS (Sala Tranquila) -->
+                        <g id="face-calm">
+                            <!-- Olhos fechados sorrindo -->
+                            <path d="M 80 105 Q 92 94 104 105" fill="none" stroke="#3b1e0e" stroke-width="4.5" stroke-linecap="round"/>
+                            <path d="M 156 105 Q 168 94 180 105" fill="none" stroke="#3b1e0e" stroke-width="4.5" stroke-linecap="round"/>
+                            <!-- Sorriso tranquilo -->
+                            <path d="M 116 152 Q 130 163 144 152" fill="none" stroke="#3b1e0e" stroke-width="3.8" stroke-linecap="round"/>
+                            <!-- Notinhas musicais / brilho de paz -->
+                            <text x="206" y="72" font-size="22" opacity="0.85">✨</text>
+                        </g>
+
+                        <!-- EXPRESSÃO 2: OLHOS ARREGALADOS E ATENTOS (Precisa de Atenção) -->
+                        <g id="face-attention" class="hidden">
+                            <!-- Olhos abertos vigilantes -->
+                            <circle cx="92" cy="102" r="10" fill="#ffffff" stroke="#3b1e0e" stroke-width="3.5"/>
+                            <circle cx="94" cy="102" r="5.5" fill="#1e1b18"/>
+                            <circle cx="96" cy="100" r="2" fill="#ffffff"/>
+
+                            <circle cx="168" cy="102" r="10" fill="#ffffff" stroke="#3b1e0e" stroke-width="3.5"/>
+                            <circle cx="166" cy="102" r="5.5" fill="#1e1b18"/>
+                            <circle cx="168" cy="100" r="2" fill="#ffffff"/>
+
+                            <!-- Sobrancelhas levantadas -->
+                            <path d="M 80 87 Q 92 81 103 88" fill="none" stroke="#3b1e0e" stroke-width="3.5" stroke-linecap="round"/>
+                            <path d="M 157 88 Q 168 81 180 87" fill="none" stroke="#3b1e0e" stroke-width="3.5" stroke-linecap="round"/>
+
+                            <!-- Boquinha séria / atenta -->
+                            <ellipse cx="130" cy="155" rx="7" ry="5" fill="#3b1e0e"/>
+
+                            <!-- Gotinha de suor / alerta -->
+                            <path d="M 206 76 C 206 76, 215 90, 215 96 A 9 9 0 1 1 197 96 C 197 90, 206 76, 206 76 Z" fill="#38bdf8" stroke="#0284c7" stroke-width="2.5"/>
+                        </g>
+
+                        <!-- EXPRESSÃO 3: ASSUSTADA TAMPANDO AS ORELHAS (Nível Sonoro Alto) -->
+                        <g id="face-high" class="hidden">
+                            <!-- Olhos apertados em > < -->
+                            <path d="M 82 95 L 98 103 L 82 111" fill="none" stroke="#3b1e0e" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M 178 95 L 162 103 L 178 111" fill="none" stroke="#3b1e0e" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+                            <!-- Boca aberta assustada -->
+                            <ellipse cx="130" cy="156" rx="12" ry="9" fill="#991b1b" stroke="#3b1e0e" stroke-width="3.5"/>
+
+                            <!-- Ondas sonoras vermelhas ao redor das orelhas -->
+                            <path d="M 38 66 Q 26 84 38 102" fill="none" stroke="#e11d48" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M 26 58 Q 10 84 26 110" fill="none" stroke="#e11d48" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M 222 66 Q 234 84 222 102" fill="none" stroke="#e11d48" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M 234 58 Q 250 84 234 110" fill="none" stroke="#e11d48" stroke-width="4" stroke-linecap="round"/>
+                        </g>
+
+                        <!-- EXPRESSÃO 4: SEM ENERGIA / GAME OVER (0 Vidas) -->
+                        <g id="face-gameover" class="hidden">
+                            <!-- Olhos em espiral / X X -->
+                            <path d="M 84 95 L 100 111 M 100 95 L 84 111" stroke="#3b1e0e" stroke-width="4.5" stroke-linecap="round"/>
+                            <path d="M 160 95 L 176 111 M 176 95 L 160 111" stroke="#3b1e0e" stroke-width="4.5" stroke-linecap="round"/>
+                            <!-- Boquinha ondulada cansada -->
+                            <path d="M 114 156 Q 122 150 130 156 Q 138 162 146 156" fill="none" stroke="#3b1e0e" stroke-width="3.8" stroke-linecap="round"/>
+                            <text x="195" y="75" font-size="24">💤</text>
+                        </g>
+
+                        <!-- PATINHAS EM REPOUSO (Estados Calmo / Atenção / Game Over) -->
+                        <g id="paws-resting">
+                            <ellipse cx="96" cy="204" rx="16" ry="13" fill="#78472a" stroke="#4a2815" stroke-width="4"/>
+                            <ellipse cx="164" cy="204" rx="16" ry="13" fill="#78472a" stroke="#4a2815" stroke-width="4"/>
+                        </g>
+
+                        <!-- PATINHAS TAMPANDO AS ORELHAS (Estado Nível Sonoro Alto) -->
+                        <g id="paws-covering-ears" class="hidden">
+                            <ellipse cx="64" cy="96" rx="17" ry="22" transform="rotate(-15 64 96)" fill="#78472a" stroke="#4a2815" stroke-width="4"/>
+                            <ellipse cx="196" cy="96" rx="17" ry="22" transform="rotate(15 196 96)" fill="#78472a" stroke="#4a2815" stroke-width="4"/>
+                        </g>
+                    </svg>
+                </div>
+
+                <!-- TEXTOS GRANDES DO ESTADO ATUAL -->
+                <div class="flex flex-col items-center md:items-start text-center md:text-left max-w-xl">
+                    <!-- Badge de Status ao vivo -->
+                    <div id="live-badge" class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-sm sm:text-base font-bold bg-slate-100 text-slate-600 mb-3">
+                        <span id="live-dot" class="w-3 h-3 rounded-full bg-slate-400"></span>
+                        <span id="live-text">Aguardando início do monitoramento</span>
+                    </div>
+
+                    <!-- Emoji + Título Principal Gigante -->
+                    <div class="flex items-center justify-center md:justify-start gap-3 sm:gap-4">
+                        <span id="state-emoji" class="text-5xl sm:text-6xl md:text-7xl select-none" role="img" aria-hidden="true">😊</span>
+                        <h2 id="state-title" class="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight">
+                            Pronto para começar
+                        </h2>
+                    </div>
+
+                    <!-- Orientação Pedagógica para a Turma -->
+                    <p id="state-subtitle" class="text-lg sm:text-xl md:text-2xl font-medium opacity-90 mt-3 leading-relaxed">
+                        A mini capivara está pronta para cuidar do silêncio da turma da <strong>Professora Rafaela Garbin</strong>!
+                    </p>
+                </div>
+            </div>
+
+            <!-- MEDIDOR VISUAL DE INTENSIDADE RELATIVA (0 A 100 - SEM DECIBÉIS FALSOS) -->
+            <div class="w-full max-w-4xl mt-6 sm:mt-8 bg-black/5 p-4 sm:p-6 rounded-3xl border border-black/5">
+                <div class="flex flex-wrap items-end justify-between gap-2 mb-2.5">
+                    <div class="text-left">
+                        <span class="block text-xs sm:text-sm font-extrabold uppercase tracking-wider opacity-80">Nível Sonoro Relativo</span>
+                        <span class="text-xs opacity-70">Escala visual de 0 a 100 (sem calibração em dB)</span>
+                    </div>
+                    <div class="flex items-baseline gap-1.5">
+                        <span id="noise-value" class="text-3xl sm:text-5xl font-black tabular-nums tracking-tight">0</span>
+                        <span class="text-base sm:text-xl font-bold opacity-60">/ 100</span>
+                    </div>
+                </div>
+
+                <!-- Barra de Progresso com Marcadores dos Limites Configurados -->
+                <div class="relative w-full h-9 sm:h-11 bg-slate-200/90 rounded-2xl overflow-hidden shadow-inner p-1">
+                    <div id="noise-bar" class="h-full rounded-xl transition-all duration-150 ease-out bg-emerald-500" style="width: 0%;"></div>
+
+                    <!-- Marcador Limite 1: Precisa de Atenção -->
+                    <div id="marker-attention" class="absolute top-0 bottom-0 w-1 bg-amber-600 z-10 transition-all duration-300" style="left: 35%;" title="Limite: Precisa de atenção">
+                        <div class="w-3 h-3 rounded-full bg-amber-600 -ml-1 mt-0.5 shadow"></div>
+                    </div>
+
+                    <!-- Marcador Limite 2: Nível Sonoro Alto -->
+                    <div id="marker-high" class="absolute top-0 bottom-0 w-1 bg-rose-700 z-10 transition-all duration-300" style="left: 65%;" title="Limite: Nível sonoro alto">
+                        <div class="w-3 h-3 rounded-full bg-rose-700 -ml-1 mt-0.5 shadow"></div>
+                    </div>
+                </div>
+
+                <!-- Legenda dos Três Estados -->
+                <div class="flex flex-wrap justify-between items-center gap-2 text-xs sm:text-sm font-bold mt-2.5 opacity-85 px-1">
+                    <span class="flex items-center gap-1.5">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span>
+                        😊 Tranquila (0–<span id="label-limit-attention">34</span>)
+                    </span>
+                    <span class="flex items-center gap-1.5">
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block"></span>
+                        😐 Atenção (<span id="label-limit-attention-start">35</span>–<span id="label-limit-high-end">64</span>)
+                    </span>
+                    <span class="flex items-center gap-1.5">
+                        <span class="w-2.5 h-2.5 rounded-full bg-rose-600 inline-block"></span>
+                        🔊 Alto (<span id="label-limit-high">65</span>+)
+                    </span>
+                </div>
+            </div>
+
+            <!-- BOTÕES PRINCIPAIS INFERIORES (INICIAR/PAUSAR + REINICIAR EM DESTAQUE) -->
+            <div class="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-4">
+                <button id="btn-toggle-monitor" type="button" class="flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-extrabold text-lg sm:text-2xl px-8 sm:px-10 py-4 rounded-3xl shadow-xl shadow-blue-600/25 transition cursor-pointer">
+                    <svg id="icon-mic-start" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
+                    </svg>
+                    <svg id="icon-mic-pause" class="w-7 h-7 hidden" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
+                    </svg>
+                    <span id="text-toggle-monitor">Iniciar Monitoramento</span>
+                </button>
+
+                <!-- Botão de Reiniciar destacado (aparece com ênfase extra quando as vidas acabam) -->
+                <button id="btn-restart-main" type="button" class="hidden items-center justify-center gap-3 bg-amber-500 hover:bg-amber-600 active:scale-95 text-slate-950 font-black text-lg sm:text-2xl px-8 sm:px-10 py-4 rounded-3xl shadow-xl shadow-amber-500/30 transition cursor-pointer animate-bounce">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.8" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                    </svg>
+                    <span>Reiniciar Capivara</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="w-full py-2.5 px-4 text-center text-xs sm:text-sm font-semibold opacity-80">
+        <span>Acalma a aula • Professora Rafaela Garbin • Áudio analisado em tempo real (nada é gravado)</span>
+    </footer>
+
+    <!-- MODAL DE CONFIGURAÇÕES DO PROFESSOR -->
+    <div id="settings-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/60 backdrop-blur-sm p-4 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="settings-modal-title">
+        <div class="bg-white text-slate-900 w-full max-w-xl rounded-3xl shadow-2xl border border-slate-200 p-6 sm:p-8 my-auto">
+            <!-- Cabeçalho do Modal -->
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                <div class="flex items-center gap-2.5">
+                    <span class="text-2xl">⚙️</span>
+                    <div>
+                        <h3 id="settings-modal-title" class="text-xl sm:text-2xl font-extrabold text-slate-800">Configurações da Turma</h3>
+                        <p class="text-xs font-semibold text-slate-500">Professora Rafaela Garbin</p>
+                    </div>
+                </div>
+                <button id="btn-close-settings" type="button" class="p-2 rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-800 transition cursor-pointer" aria-label="Fechar configurações">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Controles -->
+            <div class="space-y-5 py-5">
+                
+                <!-- 1. Limite de Vidas da Capivara (3, 5 ou 10) -->
+                <div>
+                    <label class="block font-bold text-slate-800 mb-2 flex items-center gap-2">
+                        <span class="text-lg">❤️</span> Limite de Vidas da Capivara
+                    </label>
+                    <div class="grid grid-cols-3 gap-3" id="lives-options">
+                        <button type="button" data-lives="3" class="lives-btn py-3 px-4 rounded-2xl border-2 font-extrabold text-base transition cursor-pointer">
+                            3 Vidas
+                            <span class="block text-[11px] font-medium opacity-75">Desafio rápido</span>
+                        </button>
+                        <button type="button" data-lives="5" class="lives-btn py-3 px-4 rounded-2xl border-2 font-extrabold text-base transition cursor-pointer">
+                            5 Vidas
+                            <span class="block text-[11px] font-medium opacity-75">Padrão</span>
+                        </button>
+                        <button type="button" data-lives="10" class="lives-btn py-3 px-4 rounded-2xl border-2 font-extrabold text-base transition cursor-pointer">
+                            10 Vidas
+                            <span class="block text-[11px] font-medium opacity-75">Aula longa</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. Limite: Precisa de Atenção -->
+                <div>
+                    <div class="flex justify-between items-center mb-1.5">
+                        <label for="input-attention" class="font-bold text-slate-800 flex items-center gap-2">
+                            <span class="text-lg">😐</span> Limite "Precisa de atenção"
+                        </label>
+                        <span id="val-attention" class="px-3 py-0.5 rounded-xl bg-amber-100 text-amber-900 font-extrabold text-base tabular-nums">35</span>
+                    </div>
+                    <input id="input-attention" type="range" min="10" max="80" step="1" value="35" class="w-full">
+                </div>
+
+                <!-- 3. Limite: Nível Sonoro Alto -->
+                <div>
+                    <div class="flex justify-between items-center mb-1.5">
+                        <label for="input-high" class="font-bold text-slate-800 flex items-center gap-2">
+                            <span class="text-lg">🔊</span> Limite "Nível sonoro alto"
+                        </label>
+                        <span id="val-high" class="px-3 py-0.5 rounded-xl bg-rose-100 text-rose-900 font-extrabold text-base tabular-nums">65</span>
+                    </div>
+                    <input id="input-high" type="range" min="20" max="95" step="1" value="65" class="w-full">
+                    <p class="text-xs text-slate-500 mt-1">Acima deste valor, a capivara perde 1 vida a cada 3,5 segundos contínuos.</p>
+                </div>
+
+                <!-- 4. Sensibilidade do Microfone -->
+                <div>
+                    <div class="flex justify-between items-center mb-1.5">
+                        <label for="input-sensitivity" class="font-bold text-slate-800 flex items-center gap-2">
+                            <span class="text-lg">🎙️</span> Sensibilidade do Microfone
+                        </label>
+                        <span id="val-sensitivity" class="px-3 py-0.5 rounded-xl bg-blue-100 text-blue-900 font-extrabold text-base tabular-nums">1.5x</span>
+                    </div>
+                    <input id="input-sensitivity" type="range" min="0.5" max="4.0" step="0.1" value="1.5" class="w-full">
+                </div>
+
+                <!-- 5. Suavização -->
+                <div>
+                    <label class="block font-bold text-slate-800 mb-2 flex items-center gap-2">
+                        <span class="text-lg">🌊</span> Suavização de Mudanças
+                    </label>
+                    <div class="grid grid-cols-3 gap-2.5" id="smoothing-options">
+                        <button type="button" data-smoothing="fast" class="smoothing-btn py-2.5 px-3 rounded-2xl border-2 font-bold text-sm transition cursor-pointer">
+                            Rápida
+                            <span class="block text-[11px] font-normal opacity-75">Responde logo</span>
+                        </button>
+                        <button type="button" data-smoothing="medium" class="smoothing-btn py-2.5 px-3 rounded-2xl border-2 font-bold text-sm transition cursor-pointer">
+                            Média
+                            <span class="block text-[11px] font-normal opacity-75">Equilibrada</span>
+                        </button>
+                        <button type="button" data-smoothing="slow" class="smoothing-btn py-2.5 px-3 rounded-2xl border-2 font-bold text-sm transition cursor-pointer">
+                            Lenta
+                            <span class="block text-[11px] font-normal opacity-75">Ignora palmas</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rodapé do Modal -->
+            <div class="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+                <button id="btn-reset-defaults" type="button" class="px-4 py-2.5 rounded-2xl text-sm font-bold text-slate-600 hover:bg-slate-100 transition cursor-pointer">
+                    Restaurar Padrões
+                </button>
+                <button id="btn-save-settings" type="button" class="px-6 py-2.5 rounded-2xl text-base font-extrabold bg-blue-600 hover:bg-blue-700 text-white shadow-md transition cursor-pointer">
+                    Concluir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LÓGICA DE PROCESSAMENTO DE ÁUDIO, VIDAS DA CAPIVARA E INTERFACE -->
+    <script>
+        /**
+         * Acalma a aula — Professora Rafaela Garbin
+         * Monitoramento sonoro em tempo real via Web Audio API (sem gravação),
+         * suavização exponencial assimétrica, histerese e sistema de vidas da Mini Capivara.
+         */
+        (() => {
+            const DEFAULT_CONFIG = {
+                maxLives: 5, // 3, 5 ou 10 vidas
+                attentionThreshold: 35,
+                highThreshold: 65,
+                sensitivity: 1.5,
+                smoothingMode: 'medium'
+            };
+
+            const STORAGE_KEY = 'acalma_aula_rafaela_garbin_v2';
+            const LIFE_LOSS_INTERVAL_MS = 3500; // Intervalo contínuo em nível alto para perder 1 vida (3.5s)
+            const HYSTERESIS_MARGIN = 3;
+
+            const SMOOTHING_PROFILES = {
+                fast:   { alphaUp: 0.22, alphaDown: 0.12, holdTimeMs: 600 },
+                medium: { alphaUp: 0.10, alphaDown: 0.06, holdTimeMs: 1200 },
+                slow:   { alphaUp: 0.045, alphaDown: 0.03, holdTimeMs: 2000 }
+            };
+
+            const VISUAL_STATES = {
+                idle: {
+                    bodyBg: 'bg-slate-100',
+                    cardClasses: 'bg-white border-slate-200 text-slate-900',
+                    badgeClasses: 'bg-slate-100 text-slate-600',
+                    dotClasses: 'bg-slate-400',
+                    barClasses: 'bg-slate-400',
+                    capyAnim: 'animate-capy-breathe',
+                    capyExpression: 'calm',
+                    emoji: '😊',
+                    title: 'Pronto para começar',
+                    subtitle: 'A mini capivara está pronta para cuidar do silêncio da turma da Professora Rafaela Garbin!'
+                },
+                calm: {
+                    bodyBg: 'bg-emerald-500',
+                    cardClasses: 'bg-emerald-50 border-emerald-300 text-emerald-950',
+                    badgeClasses: 'bg-emerald-200/80 text-emerald-950',
+                    dotClasses: 'bg-emerald-600 animate-ping',
+                    barClasses: 'bg-emerald-500',
+                    capyAnim: 'animate-capy-breathe',
+                    capyExpression: 'calm',
+                    emoji: '😊',
+                    title: 'Sala tranquila',
+                    subtitle: 'A capivara está super tranquila! Ótimo ambiente para aprender e se concentrar.'
+                },
+                attention: {
+                    bodyBg: 'bg-amber-400',
+                    cardClasses: 'bg-amber-50 border-amber-300 text-amber-950',
+                    badgeClasses: 'bg-amber-200/90 text-amber-950',
+                    dotClasses: 'bg-amber-600 animate-ping',
+                    barClasses: 'bg-amber-500',
+                    capyAnim: 'animate-capy-alert',
+                    capyExpression: 'attention',
+                    emoji: '😐',
+                    title: 'Precisa de atenção',
+                    subtitle: 'Opa! A capivara levantou as orelhinhas. Vamos falar um pouco mais baixo!'
+                },
+                high: {
+                    bodyBg: 'bg-rose-600',
+                    cardClasses: 'bg-rose-50 border-rose-400 text-rose-950 animate-alert-ring',
+                    badgeClasses: 'bg-rose-200 text-rose-950',
+                    dotClasses: 'bg-rose-600 animate-ping',
+                    barClasses: 'bg-rose-600',
+                    capyAnim: 'animate-capy-shake',
+                    capyExpression: 'high',
+                    emoji: '🔊',
+                    title: 'Nível sonoro alto',
+                    subtitle: 'Cuidado! O barulho está assustando a capivara e ela está perdendo vidas!'
+                },
+                gameover: {
+                    bodyBg: 'bg-slate-800',
+                    cardClasses: 'bg-slate-100 border-rose-500 text-slate-900',
+                    badgeClasses: 'bg-rose-200 text-rose-950',
+                    dotClasses: 'bg-rose-600',
+                    barClasses: 'bg-rose-500',
+                    capyAnim: '',
+                    capyExpression: 'gameover',
+                    emoji: '💤',
+                    title: 'Capivara sem energia!',
+                    subtitle: 'A capivara ficou sem energia pelo barulho! Vamos acalmar a turma e clicar em Reiniciar?'
+                }
+            };
+
+            // Estado da Aplicação
+            let config = loadConfig();
+            let currentLives = config.maxLives;
+            let isGameOver = false;
+            let isMonitoring = false;
+
+            // Variáveis Web Audio API
+            let audioContext = null;
+            let analyserNode = null;
+            let microphoneStream = null;
+            let sourceNode = null;
+            let timeDomainData = null;
+            let animationFrameId = null;
+
+            // Variáveis de Processamento e Cooldown de Vida
+            let smoothedLevel = 0;
+            let currentVisualState = 'idle';
+            let candidateState = 'calm';
+            let candidateSince = 0;
+            let highNoiseStartTime = null; // Marca o início da permanência contínua no estado 'high'
+
+            // Referências do DOM
+            const dom = {
+                body: document.getElementById('app-body'),
+                statusCard: document.getElementById('status-card'),
+                heartsContainer: document.getElementById('hearts-container'),
+                livesCounterText: document.getElementById('lives-counter-text'),
+                cooldownWrapper: document.getElementById('cooldown-wrapper'),
+                cooldownBar: document.getElementById('cooldown-bar'),
+                cooldownSeconds: document.getElementById('cooldown-seconds'),
+                capybaraWrapper: document.getElementById('capybara-wrapper'),
+                capyTangerine: document.getElementById('capy-tangerine'),
+                faceCalm: document.getElementById('face-calm'),
+                faceAttention: document.getElementById('face-attention'),
+                faceHigh: document.getElementById('face-high'),
+                faceGameover: document.getElementById('face-gameover'),
+                pawsResting: document.getElementById('paws-resting'),
+                pawsCoveringEars: document.getElementById('paws-covering-ears'),
+                liveBadge: document.getElementById('live-badge'),
+                liveDot: document.getElementById('live-dot'),
+                liveText: document.getElementById('live-text'),
+                stateEmoji: document.getElementById('state-emoji'),
+                stateTitle: document.getElementById('state-title'),
+                stateSubtitle: document.getElementById('state-subtitle'),
+                noiseValue: document.getElementById('noise-value'),
+                noiseBar: document.getElementById('noise-bar'),
+                markerAttention: document.getElementById('marker-attention'),
+                markerHigh: document.getElementById('marker-high'),
+                labelLimitAttention: document.getElementById('label-limit-attention'),
+                labelLimitAttentionStart: document.getElementById('label-limit-attention-start'),
+                labelLimitHighEnd: document.getElementById('label-limit-high-end'),
+                labelLimitHigh: document.getElementById('label-limit-high'),
+                btnToggleMonitor: document.getElementById('btn-toggle-monitor'),
+                textToggleMonitor: document.getElementById('text-toggle-monitor'),
+                iconMicStart: document.getElementById('icon-mic-start'),
+                iconMicPause: document.getElementById('icon-mic-pause'),
+                btnRestartTop: document.getElementById('btn-restart-top'),
+                btnRestartMain: document.getElementById('btn-restart-main'),
+                errorBanner: document.getElementById('error-banner'),
+                errorTitle: document.getElementById('error-title'),
+                errorMessage: document.getElementById('error-message'),
+                btnCloseError: document.getElementById('btn-close-error'),
+                btnFullscreen: document.getElementById('btn-fullscreen'),
+                textFullscreen: document.getElementById('text-fullscreen'),
+                iconFsEnter: document.getElementById('icon-fullscreen-enter'),
+                iconFsExit: document.getElementById('icon-fullscreen-exit'),
+                // Modal
+                settingsModal: document.getElementById('settings-modal'),
+                btnOpenSettings: document.getElementById('btn-open-settings'),
+                btnCloseSettings: document.getElementById('btn-close-settings'),
+                btnSaveSettings: document.getElementById('btn-save-settings'),
+                btnResetDefaults: document.getElementById('btn-reset-defaults'),
+                livesBtns: document.querySelectorAll('.lives-btn'),
+                inputAttention: document.getElementById('input-attention'),
+                valAttention: document.getElementById('val-attention'),
+                inputHigh: document.getElementById('input-high'),
+                valHigh: document.getElementById('val-high'),
+                inputSensitivity: document.getElementById('input-sensitivity'),
+                valSensitivity: document.getElementById('val-sensitivity'),
+                smoothingBtns: document.querySelectorAll('.smoothing-btn')
+            };
+
+            function loadConfig() {
+                try {
+                    const saved = localStorage.getItem(STORAGE_KEY);
+                    if (saved) {
+                        const parsed = JSON.parse(saved);
+                        return { ...DEFAULT_CONFIG, ...parsed };
+                    }
+                } catch (e) {
+                    console.warn('Erro ao ler localStorage:', e);
+                }
+                return { ...DEFAULT_CONFIG };
+            }
+
+            function saveConfig() {
+                try {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(config));
+                } catch (e) {
+                    console.warn('Erro ao salvar localStorage:', e);
+                }
+            }
+
+            /**
+             * Renderiza os corações grandes representando as vidas da Mini Capivara
+             */
+            function renderHearts(animateLastLost = false) {
+                dom.heartsContainer.innerHTML = '';
+                dom.livesCounterText.textContent = `${currentLives} / ${config.maxLives} ${currentLives === 1 ? 'vida' : 'vidas'}`;
+
+                for (let i = 0; i < config.maxLives; i++) {
+                    const isAlive = i < currentLives;
+                    const heartSpan = document.createElement('span');
+                    heartSpan.className = isAlive
+                        ? 'inline-flex items-center justify-center transition-all duration-300 animate-heart-pop'
+                        : 'inline-flex items-center justify-center opacity-25 grayscale scale-90 transition-all duration-300';
+
+                    heartSpan.innerHTML = `
+                        <svg class="w-8 h-8 sm:w-10 sm:h-10 ${isAlive ? 'text-rose-500 drop-shadow-sm' : 'text-slate-400'}" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+                        </svg>
+                    `;
+                    dom.heartsContainer.appendChild(heartSpan);
+                }
+            }
+
+            /**
+             * Atualiza a expressão facial e corporal do SVG da Mini Capivara
+             */
+            function updateCapybaraExpression(exprKey) {
+                dom.faceCalm.classList.toggle('hidden', exprKey !== 'calm');
+                dom.faceAttention.classList.toggle('hidden', exprKey !== 'attention');
+                dom.faceHigh.classList.toggle('hidden', exprKey !== 'high');
+                dom.faceGameover.classList.toggle('hidden', exprKey !== 'gameover');
+
+                // Laranjinha na cabeça aparece quando está calma
+                dom.capyTangerine.classList.toggle('opacity-0', exprKey !== 'calm');
+
+                // Patinhas tampam as orelhas no nível sonoro alto
+                const isHigh = exprKey === 'high';
+                dom.pawsResting.classList.toggle('hidden', isHigh);
+                dom.pawsCoveringEars.classList.toggle('hidden', !isHigh);
+            }
+
+            /**
+             * Sincroniza os controles visuais com a configuração salva
+             */
+            function syncUIWithConfig() {
+                const att = config.attentionThreshold;
+                const high = config.highThreshold;
+
+                dom.markerAttention.style.left = `${att}%`;
+                dom.markerHigh.style.left = `${high}%`;
+
+                dom.labelLimitAttention.textContent = Math.max(0, att - 1);
+                dom.labelLimitAttentionStart.textContent = att;
+                dom.labelLimitHighEnd.textContent = Math.max(att, high - 1);
+                dom.labelLimitHigh.textContent = high;
+
+                dom.inputAttention.value = att;
+                dom.valAttention.textContent = att;
+
+                dom.inputHigh.value = high;
+                dom.valHigh.textContent = high;
+
+                dom.inputSensitivity.value = config.sensitivity;
+                dom.valSensitivity.textContent = `${config.sensitivity.toFixed(1)}x`;
+
+                // Botões de limite de vidas (3, 5, 10)
+                dom.livesBtns.forEach(btn => {
+                    const val = parseInt(btn.dataset.lives, 10);
+                    if (val === config.maxLives) {
+                        btn.classList.add('border-rose-500', 'bg-rose-50', 'text-rose-900');
+                        btn.classList.remove('border-slate-200', 'text-slate-600', 'hover:bg-slate-50');
+                    } else {
+                        btn.classList.remove('border-rose-500', 'bg-rose-50', 'text-rose-900');
+                        btn.classList.add('border-slate-200', 'text-slate-600', 'hover:bg-slate-50');
+                    }
+                });
+
+                // Botões de suavização
+                dom.smoothingBtns.forEach(btn => {
+                    const mode = btn.dataset.smoothing;
+                    if (mode === config.smoothingMode) {
+                        btn.classList.add('border-blue-600', 'bg-blue-50', 'text-blue-900');
+                        btn.classList.remove('border-slate-200', 'text-slate-600', 'hover:bg-slate-50');
+                    } else {
+                        btn.classList.remove('border-blue-600', 'bg-blue-50', 'text-blue-900');
+                        btn.classList.add('border-slate-200', 'text-slate-600', 'hover:bg-slate-50');
+                    }
+                });
+            }
+
+            /**
+             * Aplica o estado visual completo ('idle', 'calm', 'attention', 'high', 'gameover')
+             */
+            function applyVisualState(stateKey) {
+                if (currentVisualState === stateKey) return;
+                currentVisualState = stateKey;
+
+                const theme = VISUAL_STATES[stateKey];
+
+                dom.body.className = `min-h-screen flex flex-col justify-between overflow-x-hidden ${theme.bodyBg}`;
+                dom.statusCard.className = `state-transition w-full rounded-[2.5rem] shadow-2xl border-4 p-5 sm:p-8 md:p-10 flex flex-col items-center text-center relative overflow-hidden ${theme.cardClasses}`;
+
+                dom.liveBadge.className = `inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-sm sm:text-base font-bold mb-3 ${theme.badgeClasses}`;
+                dom.liveDot.className = `w-3 h-3 rounded-full ${theme.dotClasses}`;
+                
+                if (stateKey === 'gameover') {
+                    dom.liveText.textContent = 'Vidas esgotadas • Aguardando reinício';
+                } else {
+                    dom.liveText.textContent = isMonitoring ? 'Monitorando som da sala ao vivo' : 'Monitoramento pausado';
+                }
+
+                dom.noiseBar.className = `h-full rounded-xl transition-all duration-150 ease-out ${theme.barClasses}`;
+
+                // Animação e expressão da Capivara
+                dom.capybaraWrapper.className = `relative w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 shrink-0 flex items-center justify-center ${theme.capyAnim}`;
+                updateCapybaraExpression(theme.capyExpression);
+
+                dom.stateEmoji.textContent = theme.emoji;
+                dom.stateTitle.textContent = theme.title;
+                dom.stateSubtitle.textContent = theme.subtitle;
+
+                // Mostra ou esconde barra de cooldown de perda de vida
+                if (stateKey === 'high' && !isGameOver) {
+                    dom.cooldownWrapper.classList.remove('hidden');
+                } else {
+                    dom.cooldownWrapper.classList.add('hidden');
+                    highNoiseStartTime = null;
+                }
+
+                // Destaca o botão de reiniciar no centro se zerar as vidas
+                if (stateKey === 'gameover') {
+                    dom.btnRestartMain.classList.remove('hidden');
+                    dom.btnRestartMain.classList.add('flex');
+                } else {
+                    dom.btnRestartMain.classList.add('hidden');
+                    dom.btnRestartMain.classList.remove('flex');
+                }
+            }
+
+            /**
+             * Desconta 1 vida da capivara e verifica se chegou a 0 (Game Over)
+             */
+            function loseOneLife() {
+                if (isGameOver || currentLives <= 0) return;
+
+                currentLives = Math.max(0, currentLives - 1);
+                renderHearts(true);
+
+                if (currentLives === 0) {
+                    isGameOver = true;
+                    highNoiseStartTime = null;
+                    applyVisualState('gameover');
+                }
+            }
+
+            /**
+             * Restaura todas as vidas da capivara e reinicia o ciclo
+             */
+            function restartCapybaraLives() {
+                currentLives = config.maxLives;
+                isGameOver = false;
+                highNoiseStartTime = null;
+                smoothedLevel = 0;
+                dom.noiseValue.textContent = '0';
+                dom.noiseBar.style.width = '0%';
+                dom.cooldownWrapper.classList.add('hidden');
+
+                renderHearts();
+
+                if (isMonitoring) {
+                    candidateState = 'calm';
+                    candidateSince = performance.now();
+                    applyVisualState('calm');
+                } else {
+                    applyVisualState('idle');
+                }
+            }
+
+            function showError(title, message) {
+                dom.errorTitle.textContent = title;
+                dom.errorMessage.textContent = message;
+                dom.errorBanner.classList.remove('hidden');
+            }
+
+            function hideError() {
+                dom.errorBanner.classList.add('hidden');
+            }
+
+            /**
+             * Inicia a captura do microfone via Web Audio API
+             */
+            async function startMonitoring() {
+                hideError();
+
+                if (isGameOver) {
+                    restartCapybaraLives();
+                }
+
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                    showError(
+                        'Navegador incompatível',
+                        'Este navegador não suporta acesso ao microfone via Web Audio API. Tente usar o Google Chrome ou Edge atualizado.'
+                    );
+                    return;
+                }
+
+                try {
+                    microphoneStream = await navigator.mediaDevices.getUserMedia({
+                        audio: {
+                            echoCancellation: false,
+                            noiseSuppression: false,
+                            autoGainControl: false
+                        },
+                        video: false
+                    });
+
+                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                    audioContext = new AudioCtx();
+
+                    if (audioContext.state === 'suspended') {
+                        await audioContext.resume();
+                    }
+
+                    analyserNode = audioContext.createAnalyser();
+                    analyserNode.fftSize = 1024;
+                    analyserNode.smoothingTimeConstant = 0.5;
+
+                    sourceNode = audioContext.createMediaStreamSource(microphoneStream);
+                    // Conecta APENAS ao analyserNode (sem microfonia e sem gravação)
+                    sourceNode.connect(analyserNode);
+
+                    timeDomainData = new Float32Array(analyserNode.fftSize);
+
+                    isMonitoring = true;
+                    smoothedLevel = 0;
+                    candidateState = 'calm';
+                    candidateSince = performance.now();
+                    highNoiseStartTime = null;
+
+                    updateMonitorButtonUI(true);
+                    applyVisualState('calm');
+                    processAudioLoop();
+
+                } catch (err) {
+                    console.error('Erro ao acessar microfone:', err);
+                    stopMonitoring(true);
+
+                    if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+                        showError(
+                            'Permissão do microfone negada',
+                            'Clique no ícone de cadeado ou microfone na barra de endereço do navegador e permita o acesso ao microfone.'
+                        );
+                    } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
+                        showError(
+                            'Nenhum microfone encontrado',
+                            'Conecte um microfone ou webcam ao Educatron/computador e tente novamente.'
+                        );
+                    } else {
+                        showError(
+                            'Erro ao iniciar o microfone',
+                            'O microfone pode estar ocupado por outro programa. Feche outros aplicativos e tente novamente.'
+                        );
+                    }
+                }
+            }
+
+            /**
+             * Pausa a captura do microfone
+             */
+            function stopMonitoring(keepError = false) {
+                isMonitoring = false;
+                highNoiseStartTime = null;
+
+                if (animationFrameId) {
+                    cancelAnimationFrame(animationFrameId);
+                    animationFrameId = null;
+                }
+
+                if (sourceNode) {
+                    try { sourceNode.disconnect(); } catch (e) {}
+                    sourceNode = null;
+                }
+
+                if (microphoneStream) {
+                    microphoneStream.getTracks().forEach(track => track.stop());
+                    microphoneStream = null;
+                }
+
+                if (audioContext) {
+                    try { audioContext.close(); } catch (e) {}
+                    audioContext = null;
+                }
+
+                smoothedLevel = 0;
+                dom.noiseValue.textContent = '0';
+                dom.noiseBar.style.width = '0%';
+                dom.cooldownWrapper.classList.add('hidden');
+                updateMonitorButtonUI(false);
+
+                if (!isGameOver) {
+                    applyVisualState('idle');
+                }
+
+                if (!keepError) hideError();
+            }
+
+            function updateMonitorButtonUI(active) {
+                if (active) {
+                    dom.textToggleMonitor.textContent = 'Pausar Monitoramento';
+                    dom.btnToggleMonitor.classList.remove('bg-blue-600', 'hover:bg-blue-700', 'shadow-blue-600/25');
+                    dom.btnToggleMonitor.classList.add('bg-slate-900', 'hover:bg-slate-800', 'shadow-slate-900/25');
+                    dom.iconMicStart.classList.add('hidden');
+                    dom.iconMicPause.classList.remove('hidden');
+                } else {
+                    dom.textToggleMonitor.textContent = 'Iniciar Monitoramento';
+                    dom.btnToggleMonitor.classList.add('bg-blue-600', 'hover:bg-blue-700', 'shadow-blue-600/25');
+                    dom.btnToggleMonitor.classList.remove('bg-slate-900', 'hover:bg-slate-800', 'shadow-slate-900/25');
+                    dom.iconMicStart.classList.remove('hidden');
+                    dom.iconMicPause.classList.add('hidden');
+                }
+            }
+
+            /**
+             * Loop contínuo de análise RMS, suavização e contagem de perda de vidas no nível alto
+             */
+            function processAudioLoop() {
+                if (!isMonitoring || !analyserNode) return;
+
+                analyserNode.getFloatTimeDomainData(timeDomainData);
+
+                // 1. Cálculo RMS no domínio do tempo
+                let sumSquares = 0;
+                for (let i = 0; i < timeDomainData.length; i++) {
+                    const sample = timeDomainData[i];
+                    sumSquares += sample * sample;
+                }
+                const rms = Math.sqrt(sumSquares / timeDomainData.length);
+
+                // 2. Conversão para escala relativa 0 - 100 (sem dB falso)
+                const amplified = rms * config.sensitivity * 3.2;
+                const compressed = Math.pow(Math.min(amplified, 1.5), 0.65) * 78;
+                const instantIndex = Math.max(0, Math.min(100, compressed));
+
+                // 3. Suavização Exponencial Assimétrica (EMA)
+                const profile = SMOOTHING_PROFILES[config.smoothingMode] || SMOOTHING_PROFILES.medium;
+                const alpha = instantIndex > smoothedLevel ? profile.alphaUp : profile.alphaDown;
+                smoothedLevel = smoothedLevel + alpha * (instantIndex - smoothedLevel);
+
+                const displayValue = Math.round(smoothedLevel);
+                dom.noiseValue.textContent = displayValue;
+                dom.noiseBar.style.width = `${displayValue}%`;
+
+                // Se a capivara ainda tem vidas, avalia estados e perda de vida
+                if (!isGameOver) {
+                    const targetState = evaluateStateWithHysteresis(smoothedLevel);
+                    const now = performance.now();
+
+                    if (targetState !== currentVisualState) {
+                        if (targetState !== candidateState) {
+                            candidateState = targetState;
+                            candidateSince = now;
+                        } else if (now - candidateSince >= profile.holdTimeMs) {
+                            applyVisualState(targetState);
+                            // Ao entrar no estado 'high', perde 1 vida imediatamente e inicia o cronômetro para as próximas
+                            if (targetState === 'high') {
+                                loseOneLife();
+                                highNoiseStartTime = now;
+                            }
+                        }
+                    } else {
+                        candidateState = currentVisualState;
+                        candidateSince = now;
+                    }
+
+                    // Gerencia perda gradual de vidas enquanto permanecer no estado 'high'
+                    if (currentVisualState === 'high' && !isGameOver) {
+                        if (highNoiseStartTime === null) {
+                            highNoiseStartTime = now;
+                        }
+                        const elapsed = now - highNoiseStartTime;
+                        const remainingMs = Math.max(0, LIFE_LOSS_INTERVAL_MS - elapsed);
+                        const progressPct = (remainingMs / LIFE_LOSS_INTERVAL_MS) * 100;
+
+                        dom.cooldownBar.style.width = `${progressPct}%`;
+                        dom.cooldownSeconds.textContent = `${(remainingMs / 1000).toFixed(1)}s`;
+
+                        if (elapsed >= LIFE_LOSS_INTERVAL_MS) {
+                            loseOneLife();
+                            highNoiseStartTime = now;
+                        }
+                    }
+                }
+
+                animationFrameId = requestAnimationFrame(processAudioLoop);
+            }
+
+            function evaluateStateWithHysteresis(level) {
+                const att = config.attentionThreshold;
+                const high = config.highThreshold;
+
+                if (currentVisualState === 'high') {
+                    if (level < high - HYSTERESIS_MARGIN) {
+                        return level >= att ? 'attention' : 'calm';
+                    }
+                    return 'high';
+                }
+
+                if (currentVisualState === 'attention') {
+                    if (level >= high) return 'high';
+                    if (level < att - HYSTERESIS_MARGIN) return 'calm';
+                    return 'attention';
+                }
+
+                if (level >= high) return 'high';
+                if (level >= att) return 'attention';
+                return 'calm';
+            }
+
+            async function toggleFullscreen() {
+                try {
+                    if (!document.fullscreenElement) {
+                        await document.documentElement.requestFullscreen();
+                    } else {
+                        await document.exitFullscreen();
+                    }
+                } catch (err) {
+                    console.warn('Fullscreen indisponível:', err);
+                }
+            }
+
+            document.addEventListener('fullscreenchange', () => {
+                const isFs = Boolean(document.fullscreenElement);
+                dom.textFullscreen.textContent = isFs ? 'Sair da Tela Cheia' : 'Tela Cheia';
+                dom.iconFsEnter.classList.toggle('hidden', isFs);
+                dom.iconFsExit.classList.toggle('hidden', !isFs);
+            });
+
+            // Eventos Principais
+            dom.btnToggleMonitor.addEventListener('click', () => {
+                if (isMonitoring) {
+                    stopMonitoring();
+                } else {
+                    startMonitoring();
+                }
+            });
+
+            dom.btnRestartTop.addEventListener('click', restartCapybaraLives);
+            dom.btnRestartMain.addEventListener('click', restartCapybaraLives);
+            dom.btnCloseError.addEventListener('click', hideError);
+            dom.btnFullscreen.addEventListener('click', toggleFullscreen);
+
+            // Eventos do Modal de Configurações
+            dom.btnOpenSettings.addEventListener('click', () => {
+                syncUIWithConfig();
+                dom.settingsModal.classList.remove('hidden');
+                dom.settingsModal.classList.add('flex');
+            });
+
+            function closeSettingsModal() {
+                dom.settingsModal.classList.add('hidden');
+                dom.settingsModal.classList.remove('flex');
+                saveConfig();
+            }
+
+            dom.btnCloseSettings.addEventListener('click', closeSettingsModal);
+            dom.btnSaveSettings.addEventListener('click', closeSettingsModal);
+            dom.settingsModal.addEventListener('click', (e) => {
+                if (e.target === dom.settingsModal) closeSettingsModal();
+            });
+
+            // Seletor de Limite de Vidas (3, 5 ou 10)
+            dom.livesBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const selectedLives = parseInt(btn.dataset.lives, 10);
+                    config.maxLives = selectedLives;
+                    currentLives = selectedLives;
+                    isGameOver = false;
+                    highNoiseStartTime = null;
+                    renderHearts();
+                    syncUIWithConfig();
+                    if (isMonitoring && currentVisualState === 'gameover') {
+                        applyVisualState('calm');
+                    }
+                });
+            });
+
+            dom.inputAttention.addEventListener('input', (e) => {
+                const val = parseInt(e.target.value, 10);
+                config.attentionThreshold = val;
+                if (config.highThreshold <= val + 5) {
+                    config.highThreshold = Math.min(95, val + 5);
+                }
+                syncUIWithConfig();
+            });
+
+            dom.inputHigh.addEventListener('input', (e) => {
+                const val = parseInt(e.target.value, 10);
+                config.highThreshold = val;
+                if (config.attentionThreshold >= val - 5) {
+                    config.attentionThreshold = Math.max(10, val - 5);
+                }
+                syncUIWithConfig();
+            });
+
+            dom.inputSensitivity.addEventListener('input', (e) => {
+                config.sensitivity = parseFloat(e.target.value);
+                syncUIWithConfig();
+            });
+
+            dom.smoothingBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    config.smoothingMode = btn.dataset.smoothing;
+                    syncUIWithConfig();
+                });
+            });
+
+            dom.btnResetDefaults.addEventListener('click', () => {
+                config = { ...DEFAULT_CONFIG };
+                saveConfig();
+                restartCapybaraLives();
+                syncUIWithConfig();
+            });
+
+            // Inicialização
+            syncUIWithConfig();
+            renderHearts();
+        })();
+    </script>
+</body>
+</html>
